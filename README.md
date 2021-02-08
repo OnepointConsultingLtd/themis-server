@@ -1,7 +1,7 @@
 # themis serverside API
 Node.js service API for Themis rules manager written in express.js. Integration w/ MongoDB
 
-## Endpoints:
+## Endpoints list
 ### Config tables CRUD API
 | Path               | Description |
 | :----------------- |:------------|
