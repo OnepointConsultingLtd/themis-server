@@ -3,10 +3,12 @@ Node.js service API for Themis rules manager written in express.js. Integration 
 
 ## Endpoints:
 ### Config tables CRUD API
-/:branch/load
-/:branch/create
-/:branch/update/:id
-/:branch/delete/:id
+| Path        | Description |
+| ------------- |-------------|
+|/:branch/load   |      |
+|/:branch/create |      |
+|/:branch/update/:id |     |
+|/:branch/delete/:id |     |
 
 ### Rules table CRUD API
 /rules/load
