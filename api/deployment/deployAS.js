@@ -39,7 +39,7 @@ async function uploadBlob(content, fileName) {
 }
 
 /** receive and upload rules dslr text file */
-app.post('/oy/azure-storage/:fileName', async (req, res) => {
+app.post('/deploy/azure-storage/:fileName', async (req, res) => {
   const uploadResponse = await uploadBlob(req.body, req.params.fileName);
   console.log('Return: ', uploadResponse);
   // if (err /* || stderr */) res.status(404).send({ message: `${err} ${stderr}` }); // TODO: we need to get feedback from Azure Storage
