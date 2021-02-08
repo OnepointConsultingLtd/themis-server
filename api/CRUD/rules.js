@@ -12,7 +12,7 @@ const app = express();
 
 
 /** FETCH ALL Rules */
-app.get('/api/rules/load', (req, res) => {
+app.get('/rules/load', (req, res) => {
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (error, client) => {
     if (error) throw error;
     console.log('Connected to MongoDB. Fetching rules list.');
@@ -27,7 +27,7 @@ app.get('/api/rules/load', (req, res) => {
 });
 
 /** IMPORT new Rules and dedup */
-app.post('/api/rules/import', (req, res) => {
+app.post('/rules/import', (req, res) => {
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (error, client) => {
     if (error) throw error;
     console.log('Connected to MongoDB. Importing new rules.');
@@ -69,7 +69,7 @@ app.post('/api/rules/import', (req, res) => {
 });
 
 /** IMPORT new version */
-app.post('/api/version/clone/:id', (req, res) => {
+app.post('/version/clone/:id', (req, res) => {
   const { id } = req.params;
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (error, client) => {
     if (error) throw error;
@@ -104,7 +104,7 @@ app.post('/api/version/clone/:id', (req, res) => {
 /** UPDATE any rule's top-level field: such as name, tags, active, locked */
 // this route should prior to '/update/:id/:version': i was getting "pls pass string value" error
 // https://stackoverflow.com/questions/48705503/error-argument-passed-in-must-be-a-single-string-of-12-bytes-or-a-string-of-24
-app.post('/api/rules/update/:id', (req, res) => {
+app.post('/rules/update/:id', (req, res) => {
   const { id } = req.params; // <---- ATTENTION: string type
 
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, async (error, client) => {
@@ -134,7 +134,7 @@ app.post('/api/rules/update/:id', (req, res) => {
 });
 
 /** UPDATE the whole rule (all versions incl.) */
-app.post('/api/version/update/:id/:version', (req, res) => {
+app.post('/version/update/:id/:version', (req, res) => {
   const { id, version } = req.params; // <---- ATTENTION: string type
   console.log(req.body.versions, version);
   // validating the content of the specific rule version only
@@ -170,7 +170,7 @@ app.post('/api/version/update/:id/:version', (req, res) => {
 });
 
 /** DELETE a rule */
-app.post('/api/rules/delete/:id', (req, res) => {
+app.post('/rules/delete/:id', (req, res) => {
   const { id } = req.params;
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (error, client) => {
     if (error) throw error;
@@ -197,7 +197,7 @@ app.post('/api/rules/delete/:id', (req, res) => {
 
 // ---------------------------------------> BULK ACTIONS
 /** bulk Deactivate */
-app.post('/api/bulk/rules/deactivate', (req, res) => {
+app.post('/bulk/rules/deactivate', (req, res) => {
   const bulkIds = req.body.array.map(id => ObjectId(id));
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (error, client) => {
     if (error) throw error;
@@ -221,7 +221,7 @@ app.post('/api/bulk/rules/deactivate', (req, res) => {
   });
 });
 /** bulk Activate */
-app.post('/api/bulk/rules/activate', (req, res) => {
+app.post('/bulk/rules/activate', (req, res) => {
   const bulkIds = req.body.array.map(id => ObjectId(id));
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (error, client) => {
     if (error) throw error;
@@ -245,7 +245,7 @@ app.post('/api/bulk/rules/activate', (req, res) => {
   });
 });
 /** bulk Delete */
-app.post('/api/bulk/rules/delete', (req, res) => {
+app.post('/bulk/rules/delete', (req, res) => {
   const bulkIds = req.body.array.map(id => ObjectId(id));
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (error, client) => {
     if (error) throw error;
@@ -268,7 +268,7 @@ app.post('/api/bulk/rules/delete', (req, res) => {
   });
 });
 /** Bulk Update tags */
-app.post('/api/bulk/rules/update/tags', (req, res) => {
+app.post('/bulk/rules/update/tags', (req, res) => {
   const bulkIds = req.body.array.map(id => ObjectId(id));
   const { tags } = req.body;
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (error, client) => {

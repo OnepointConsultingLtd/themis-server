@@ -8,7 +8,7 @@ const app = express();
 /** GET Configuration tables
  * @param branch: CRUD-table's redux-branch = MongoCollection name
 */
-app.get('/api/:branch/load', (req, res) => {
+app.get('/:branch/load', (req, res) => {
   const { branch } = req.params;
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (err, client) => {
     if (err) throw err;
@@ -26,7 +26,7 @@ app.get('/api/:branch/load', (req, res) => {
 /** Keep adding : update, delete, create */
 
 /** CREATE */
-app.post('/api/:branch/create', (req, res) => {
+app.post('/:branch/create', (req, res) => {
   const { branch } = req.params;
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (error, client) => {
     if (error) throw error;
@@ -48,7 +48,7 @@ app.post('/api/:branch/create', (req, res) => {
 });
 
 /** UPDATE */
-app.post('/api/:branch/update/:id', (req, res) => {
+app.post('/:branch/update/:id', (req, res) => {
   const { branch, id } = req.params;
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, async (error, client) => {
     if (error) throw error;
@@ -67,7 +67,7 @@ app.post('/api/:branch/update/:id', (req, res) => {
 });
 
 /** DELETE */
-app.post('/api/:branch/delete/:id', (req, res) => {
+app.post('/:branch/delete/:id', (req, res) => {
   const { branch, id } = req.params;
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (error, client) => {
     if (error) throw error;
