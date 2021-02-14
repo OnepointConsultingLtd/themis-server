@@ -27,7 +27,7 @@ const validateRules = (text, /* responseFn */) => {
   console.log(cleanedText);
   try {
     // !!!! execSync is non-async process BUT returns a binary Buffer that should get converted to UTF8 string !!!!
-    const stdoutBuffer = execSync(`java -jar ./server/api/functions/validator/validate-dslr-string-0.1-jar-with-dependencies.jar "${cleanedText}" ./server/api/functions/validator/ALanguage.dsl`);
+    const stdoutBuffer = execSync(`java -jar ./api/functions/validator/validate-dslr-string-0.1-jar-with-dependencies.jar "${cleanedText}" ./api/functions/validator/ALanguage.dsl`);
     const stdout = stdoutBuffer.toString('utf8');
     // (err, stdout, stderr) => { // DECOMISSIONED callback of exec()
     //   console.log('stderr: ', stderr); // unwiring stderr as the jar won't sent any runtime errors and unfortunatelly heroku is using this channel for log messages

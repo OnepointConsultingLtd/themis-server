@@ -1,8 +1,8 @@
 {
   "name": "themis-server",
   "version": "1.0.0",
-  "description": "dedicated api server for themis rules system",
-  "main": "index.js",
+  "description": "Dedicated api server for themis rules manager",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev" : "./node_modules/.bin/nodemon server.js",
