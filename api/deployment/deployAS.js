@@ -1,21 +1,20 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-restricted-syntax */
-const { BlobServiceClient } = require('@azure/storage-blob');
-const express = require('express');
+const { BlobServiceClient } = require("@azure/storage-blob");
+const express = require("express");
 const app = express();
-const timestamp = require('time-stamp');
-const url = require('../../api');
+const timestamp = require("time-stamp");
+const url = require("../../api");
 
 const account = process.env.RULES_AZURE_ACCOUNT;
 const sas = process.env.RULES_AZURE_SAS;
 const containerName = process.env.RULES_AZURE_CONTAINER;
 
-const blobServiceClient =  new BlobServiceClient(`https://${account}.blob.core.windows.net${sas}`); 
-// new BlobServiceClient.fromConnectionString(`https://${account}.blob.core.windows.net/rules${sas}`);
+const blobServiceClient = new BlobServiceClient(`https://${account}.blob.core.windows.net${sas}`);
 
 async function uploadBlob(content, fileName) {
   const containerClient = blobServiceClient.getContainerClient(containerName);
-  const blobName = `${timestamp.utc('YYYYMMDDHHmmss')}_${fileName}`;
+  const blobName = `${timestamp.utc("YYYYMMDDHHmmss")}_${fileName}`;
   const blockBlobClient = containerClient.getBlockBlobClient(blobName);
   console.log(content.length);
   let blobList = [];
@@ -33,20 +32,25 @@ async function uploadBlob(content, fileName) {
   }
   console.log(blobList);
   if (blobList.includes(blobName)) {
-    console.log('Found file in AazureStorage!', blobName);
+    console.log("Found file in AazureStorage!", blobName);
     return true;
   }
   return false;
-//   console.log(`Upload block blob ${blobName} successfully`, uploadBlobResponse.requestId);
 }
 
 /** receive and upload rules dslr text file */
 app.post(url.deploy.azure, async (req, res) => {
   const uploadResponse = await uploadBlob(req.body, req.params.fileName);
-  console.log('Return: ', uploadResponse);
+  console.log("Return: ", uploadResponse);
   // if (err /* || stderr */) res.status(404).send({ message: `${err} ${stderr}` }); // TODO: we need to get feedback from Azure Storage
-  if (!uploadResponse) res.status(500).send({ message: 'File was not deployed' });
-  else res.status(200).send({ response: 'File was succesfully deployed!' });
+  if (!uploadResponse)
+    res.status(500).send({
+      message: "File was not deployed",
+    });
+  else
+    res.status(200).send({
+      response: "File was succesfully deployed!",
+    });
 });
 
 module.exports = app;
