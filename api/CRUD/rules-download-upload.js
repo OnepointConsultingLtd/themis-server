@@ -7,7 +7,7 @@ const dedupQuery = require('../functions/aggregations');
 const url = require('../../api');
 
 // Mongo Connection URL
-const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/';
+const dbUrl = process.env.MONGODB_URI /*|| 'mongodb://localhost:27017/';*/
 
 const app = express();
 
