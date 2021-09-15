@@ -4,12 +4,14 @@ const { BlobServiceClient } = require('@azure/storage-blob');
 const express = require('express');
 const app = express();
 const timestamp = require('time-stamp');
+const url = require('../../api');
 
 const account = process.env.RULES_AZURE_ACCOUNT;
 const sas = process.env.RULES_AZURE_SAS;
 const containerName = process.env.RULES_AZURE_CONTAINER;
 
-const blobServiceClient = new BlobServiceClient(`https://${account}.blob.core.windows.net${sas}`);
+const blobServiceClient =  new BlobServiceClient(`https://${account}.blob.core.windows.net${sas}`); 
+// new BlobServiceClient.fromConnectionString(`https://${account}.blob.core.windows.net/rules${sas}`);
 
 async function uploadBlob(content, fileName) {
   const containerClient = blobServiceClient.getContainerClient(containerName);
@@ -39,11 +41,11 @@ async function uploadBlob(content, fileName) {
 }
 
 /** receive and upload rules dslr text file */
-app.post('/deploy/azure-storage/:fileName', async (req, res) => {
+app.post(url.deploy.azure, async (req, res) => {
   const uploadResponse = await uploadBlob(req.body, req.params.fileName);
   console.log('Return: ', uploadResponse);
   // if (err /* || stderr */) res.status(404).send({ message: `${err} ${stderr}` }); // TODO: we need to get feedback from Azure Storage
-  if (!uploadResponse) res.status(404).send({ message: 'File was not deployed' });
+  if (!uploadResponse) res.status(500).send({ message: 'File was not deployed' });
   else res.status(200).send({ response: 'File was succesfully deployed!' });
 });
 

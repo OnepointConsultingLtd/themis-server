@@ -16,6 +16,9 @@ const API = {
       bulkActivate:   '/api/rules/bulk/activate',
       bulkDelete:     '/api/rules/bulk/delete',
       bulkUpdateTags: '/api/rules/bulk/update/tags'
+    },
+    deploy: {
+      azure: '/api/deploy/azure-storage/:fileName'
     }
   };
 

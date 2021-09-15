@@ -1,7 +1,7 @@
 const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 // Mongo Connection URL
-const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/';
+const dbUrl = process.env.MONGODB_URI /* || 'mongodb://localhost:27017/'*/ ;
 const url = require('../../api');
 
 const app = express();
