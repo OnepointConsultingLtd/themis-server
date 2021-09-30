@@ -5,7 +5,7 @@ const apiRulesUploadDownload = require('./CRUD/rules-download-upload');
 const apiRulesBulk = require('./CRUD/rules-bulk');
 const apiConfig = require('./CRUD/config');
 // const apiDeployInLocalFS = require('./deployment/deployInLocalFS'); // TODO: only if we will support local filesystem access
-const apiDeployAS = require('./deployment/deployAS');
+const apiDeployAzure = require('./deployment/deployAzure');
 const bodyParser = require('body-parser');
 
 // https://stackoverflow.com/questions/52016659/nodejs-router-payload-too-large
@@ -20,6 +20,6 @@ app.use(apiRulesBulk);
 app.use(apiRulesCRUD);
 app.use(apiConfig);
 // app.use(apiDeployInLocalFS); // TODO: only if we will support local filesystem access
-app.use(apiDeployAS);
+app.use(apiDeployAzure);
 
 module.exports = app;
