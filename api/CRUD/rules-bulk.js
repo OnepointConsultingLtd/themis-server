@@ -1,5 +1,5 @@
-/* eslint-disable radix */
-/* eslint-disable no-unused-vars */
+
+
 const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 const url = require('../../api');

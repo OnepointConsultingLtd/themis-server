@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const api = require('./api/index');
 
+process.on('uncaughtException', function (err) {
+  console.log('Caught exception: ', err);
+});
+
 app.set('port', (process.env.PORT || 5000));
 app.use(api);
 app.get('/', (request, response) => {

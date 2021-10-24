@@ -1,5 +1,3 @@
-/* eslint-disable radix */
-/* eslint-disable no-unused-vars */
 const validateRules = require('../functions/validate');
 const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
@@ -54,7 +52,7 @@ app.post(url.rules.updateRule, (req, res) => {
     console.log('Connected to MongoDB. Updating status of rule.: ', id, req.body);
     const db = client.db('rulems');
     const updateQuery = {};
-    // eslint-disable-next-line prefer-destructuring
+
     updateQuery[Object.keys(req.body)[0]] = Object.values(req.body)[0]; // key-value included in req.body
 
     db.collection('rules').findOneAndUpdate(

@@ -1,5 +1,5 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-restricted-syntax */
+
+
 const { BlobServiceClient } = require("@azure/storage-blob");
 const express = require("express");
 const app = express();

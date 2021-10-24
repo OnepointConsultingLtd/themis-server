@@ -1,5 +1,3 @@
-/* eslint-disable radix */
-/* eslint-disable no-unused-vars */
 const validateRules = require('../functions/validate');
 const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
